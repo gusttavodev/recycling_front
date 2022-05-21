@@ -19,7 +19,7 @@
             :error="errors?.password"
             class="mt-10"
             label="Senha"
-            type="text"
+            type="password"
             
           />
 

@@ -30,16 +30,22 @@
               </div>
               <div class="flex-shrink-0 flex bg-gray-700 p-4">
                 <a href="#" class="flex-shrink-0 group block">
-                  <div class="flex items-center">
-                    <div>
-                      <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                    </div>
-                    <div class="ml-3">
-                      <p class="text-base font-medium text-white">Tom Cook</p>
-                      <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
-                    </div>
+                  <div class="flex flex-col">                  
+                      <div class="flex">
+                        <div>
+                        <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                        </div>
+                        <div class="ml-3">
+                        <p class="text-base font-medium text-white">Tom Cook</p>
+                        <button class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</button>
+                        </div>    
+                      </div>     
+                      <div class="flex w-full justify-center pt-2">
+                        <button @click="authLogout" type="button" class="w-full px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sair</button>  
+                      </div>                          
                   </div>
                 </a>
+                
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -64,14 +70,17 @@
         </div>
         <div class="flex-shrink-0 flex bg-gray-700 p-4">
           <a href="#" class="flex-shrink-0 w-full group block">
-            <div class="flex items-center">
+            <div class="flex flex-row justify-between" >              
               <div>
                 <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
               </div>
               <div class="ml-3">
                 <p class="text-sm font-medium text-white">Tom Cook</p>
-                <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
-              </div>
+                <button class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</button>
+              </div>              
+              <div>
+                <button @click="authLogout" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sair</button>
+              </div>              
             </div>
           </a>
         </div>
@@ -116,6 +125,8 @@ import {
   XIcon,
 } from '@heroicons/vue/outline'
 
+import useAuth from '../composables/auth'
+
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -124,6 +135,7 @@ const navigation = [
   { name: 'Documents', href: '#', icon: InboxIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
-
 const sidebarOpen = ref(false)
+const { authLogout } = useAuth()
+
 </script>

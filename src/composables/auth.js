@@ -22,7 +22,7 @@ export default function useAuth() {
 
             const token = `${response.data.token_type} ${response.data.access_token}`
             Cookie.setToken(token)
-            store.commit('user/STORE_USER', response.data.data)
+            store.dispatch('auth/login', response.data.data)
             router.push({name: 'index'})
 
         } catch (e) {
@@ -37,8 +37,8 @@ export default function useAuth() {
     const authRegister = async (data) => {
         errors.value = ''
         try {
-            await axios.post('/api/register', data)
-            await router.push({ name: 'companies.index' })
+            await axios.post('/register', data)
+            // await router.push({ name: 'companies.index' })
         } catch (e) {
             if (e.response.status === 422) {
                 for (const key in e.response.data.errors) {
@@ -52,10 +52,22 @@ export default function useAuth() {
 
     }
 
+    const authLogout = async () => {
+        try {
+            await axios.post('/logout')
+            Cookie.deleteToken()
+            await router.push({ name: 'login' })
+        } catch (e) {
+            console.log("e.response => ", e.response)
+        }
+
+    }
+
     return {
         errors,
         authLogin,
         authRegister,
+        authLogout,
         store
     }
 }
