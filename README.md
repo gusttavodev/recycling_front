@@ -10,3 +10,9 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 https://laraveldaily.com/laravel-8-vue-3-crud-composition-api/
 https://github.com/vuejs/vuex/blob/main/examples/composition/shopping-cart/store/modules/cart.js
 https://vuex.vuejs.org/guide/composition-api.html#accessing-mutations-and-actions
+
+
+# To use SSH set remote origin with SSH 
+```
+ ssh-add ~/.ssh/id_rsa_github
+```
