@@ -9,7 +9,7 @@
             :error="errors?.email"
             class="mt-10"
             label="Email"
-            type="text"
+            type="email"
             
           />
 

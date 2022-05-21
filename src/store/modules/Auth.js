@@ -18,15 +18,14 @@ const getters = {
 // actions
 const actions = {
     login({commit}){
-        console.log("AAA CHAMOU A ACTION")
         return axios.get('/me').then(({data})=> {
             console.log("Data => ", data)
-            commit(SET_USER,data)
-            commit(SET_AUTHENTICATED,true)
+            commit('SET_USER',data)
+            commit('SET_AUTHENTICATED',true)
             router.push({name:'dashboard'})
         }).catch(({response:{data}})=>{
-            commit(SET_USER,{})
-            commit(SET_AUTHENTICATED,false)
+            commit('SET_USER',{})
+            commit('SET_AUTHENTICATED',false)
         })
     },
 

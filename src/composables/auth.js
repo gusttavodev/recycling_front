@@ -37,16 +37,16 @@ export default function useAuth() {
     const authRegister = async (data) => {
         errors.value = ''
         try {
-            await axios.post('/register', data)
-            // await router.push({ name: 'companies.index' })
+            const response = await axios.post('/register', data)
+            const token = `${response.data.token_type} ${response.data.access_token}`
+            Cookie.setToken(token)
+            store.dispatch('auth/login', response.data.data)
+            router.push({name: 'index'})
         } catch (e) {
-            if (e.response.status === 422) {
-                for (const key in e.response.data.errors) {
-                    errors.value += e.response.data.errors[key][0] + ' ';
-                }
+            if (e.response.status === 422) {  
+                errors.value = dataFormat.formatErrors(e.response.data.errors)
             }else if(e.response.status === 401){
-                console.log("e.response => ", e.response)
-                // toaster()
+                toaster.warning(e.response.data.message)
             }
         }
 

@@ -112,7 +112,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { mapGetters, mapState } from 'vuex'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   CalendarIcon,
@@ -138,4 +139,7 @@ const navigation = [
 const sidebarOpen = ref(false)
 const { authLogout } = useAuth()
 
+// const user = computed(() => name.value.length > 0)
+const user = mapGetters(('user'))
+console.log("user => ", user)
 </script>
