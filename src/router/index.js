@@ -8,6 +8,8 @@ import Login from '../views/Auth/Login.vue';
 import Register from '../views/Auth/Register.vue';
 
 import Home from '../views/Admin/Home.vue';
+import Product from '../views/Admin/Product/Index.vue';
+import Category from '../views/Admin/Category/Index.vue';
 
 import Guard from '../service/middleware';
 
@@ -16,7 +18,9 @@ const routes = [
         path: '/', component: LayoutDefault,
         beforeEnter: Guard.redirectIfNotAuthenticated,
         children: [
-            { path: '', name: 'index', component: Home }
+            { path: '', name: 'index', component: Home },
+            { path: 'product', name: 'product', component: Product },
+            { path: 'category', name: 'category', component: Category }
         ],
     },
     {

@@ -62,10 +62,10 @@
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
           </div>
           <nav class="mt-5 flex-1 px-2 space-y-1">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+            <router-link v-for="item in navigation" :key="item.name" :to="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
               <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
               {{ item.name }}
-            </a>
+            </router-link>
           </nav>
         </div>
         <div class="flex-shrink-0 flex bg-gray-700 p-4">
@@ -96,14 +96,10 @@
       <main class="flex-1">
         <div class="py-6">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+            <!-- <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1> -->
           </div>
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <!-- Replace with your content -->
-            <div class="py-4">
-              <div class="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-            </div>
-            <!-- /End replace -->
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">            
+            <router-view/>
           </div>
         </div>
       </main>
@@ -115,13 +111,10 @@
 import { ref, computed } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
+  ChartPieIcon,
+  CubeIcon,
+  BookmarkIcon,
   MenuIcon,
-  UsersIcon,
   XIcon,
 } from '@heroicons/vue/outline'
 
@@ -130,12 +123,9 @@ import {useUserStore} from '../store/useUserStore'
 const userStore = useUserStore()
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Dashboard', href: {name: 'index'}, icon: ChartPieIcon, current: true },
+  { name: 'Produtos', href: {name: 'product'}, icon: CubeIcon, current: false },
+  { name: 'Categorias', href: {name: 'category'}, icon: BookmarkIcon, current: false }
 ]
 const sidebarOpen = ref(false)
 const { authLogout } = useAuth()
