@@ -1,18 +1,15 @@
 import { createApp } from 'vue'
 import Toaster from "@meforma/vue-toaster";
-import store from './store/index'
-import router from './router';
 import App from './App.vue'
-
+import router from './router';
+import { createPinia } from 'pinia'
+import './index.css'
+import Input from './components/Shared/input.vue'
 import axios from './plugins/axios';
 
-import './index.css'
-
-import Input from './components/Shared/input.vue'
-
-
 const app = createApp(App)
-app.use(store)
+
+app.use(createPinia())
 app.use(router)
 app.use(Toaster)
 

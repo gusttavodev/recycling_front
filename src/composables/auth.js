@@ -1,15 +1,15 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 import { createToaster } from "@meforma/vue-toaster";
 import dataFormat from "../service/dataFormat";
 import Cookie from "../service/cookie";
+import {useUserStore} from '../store/useUserStore'
 
 export default function useAuth() {
     const errors = ref({})
     const router = useRouter()
-    const store = useStore()
+    const store = useUserStore()
     const toaster = createToaster({
         position: "top-right"
     });
@@ -22,10 +22,11 @@ export default function useAuth() {
 
             const token = `${response.data.token_type} ${response.data.access_token}`
             Cookie.setToken(token)
-            store.dispatch('auth/login', response.data.data)
+            store.login()
             router.push({name: 'index'})
 
         } catch (e) {
+            console.log("Error => ", e)
             if (e.response.status === 422) {  
                 errors.value = dataFormat.formatErrors(e.response.data.errors)
             }else if(e.response.status === 401){
@@ -40,7 +41,7 @@ export default function useAuth() {
             const response = await axios.post('/register', data)
             const token = `${response.data.token_type} ${response.data.access_token}`
             Cookie.setToken(token)
-            store.dispatch('auth/login', response.data.data)
+            store.login()
             router.push({name: 'index'})
         } catch (e) {
             if (e.response.status === 422) {  
