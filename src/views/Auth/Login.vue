@@ -70,7 +70,6 @@ export default {
     
     const login = async () => {
       await authLogin({ ...form })     
-      // store.dispatch('auth/login', {email: 'gusttavo212@gmail.com', password: '12345678'})
     }
 
     return {

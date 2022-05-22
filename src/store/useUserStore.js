@@ -1,28 +1,21 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: [],
-    /** @type {boolean} */
+    user: {},
     authenticated: false
   }),
   getters: {
-    authenticated(state) {
-      return state.authenticated
-    },
-    user(state){
-        return state.user
+    // authenticated(state) {
+    //   return state.authenticated
+    // },
+    authUser(state){
+      return state.user
     }
   },
   actions: {
-    login(){
-        return axios.get('/me').then(({data})=> {
-            this.authenticated = true
-            this.user = data
-        }).catch(()=>{
-            this.authenticated = false
-            this.user = {}
-        })
+    storeUser(data){
+      this.authenticated = true
+      this.user = data
     },
     logout(){
         this.authenticated = false

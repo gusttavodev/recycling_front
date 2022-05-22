@@ -36,7 +36,7 @@
                         <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                         </div>
                         <div class="ml-3">
-                        <p class="text-base font-medium text-white">Tom Cook</p>
+                        <p class="text-base font-medium text-white">{{userStore?.user?.name}}</p>
                         <button class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</button>
                         </div>    
                       </div>     
@@ -75,7 +75,7 @@
                 <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
               </div>
               <div class="ml-3">
-                <p class="text-sm font-medium text-white">Tom Cook</p>
+                <p class="text-sm font-medium text-white">{{userStore?.user?.name}}</p>
                 <button class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</button>
               </div>              
               <div>
@@ -126,6 +126,8 @@ import {
 } from '@heroicons/vue/outline'
 
 import useAuth from '../composables/auth'
+import {useUserStore} from '../store/useUserStore'
+const userStore = useUserStore()
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -138,6 +140,4 @@ const navigation = [
 const sidebarOpen = ref(false)
 const { authLogout } = useAuth()
 
-// const user = computed(() => name.value.length > 0)
-// console.log("user => ", user)
 </script>

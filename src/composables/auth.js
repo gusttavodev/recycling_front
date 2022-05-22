@@ -21,8 +21,7 @@ export default function useAuth() {
             const response = await axios.post('/login', params)
 
             const token = `${response.data.token_type} ${response.data.access_token}`
-            Cookie.setToken(token)
-            store.login()
+            Cookie.setToken(token)          
             router.push({name: 'index'})
 
         } catch (e) {
@@ -40,8 +39,7 @@ export default function useAuth() {
         try {
             const response = await axios.post('/register', data)
             const token = `${response.data.token_type} ${response.data.access_token}`
-            Cookie.setToken(token)
-            store.login()
+            Cookie.setToken(token)           
             router.push({name: 'index'})
         } catch (e) {
             if (e.response.status === 422) {  

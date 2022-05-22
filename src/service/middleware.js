@@ -14,10 +14,7 @@ export default {
 
         // Verificar se o token está valido
         await axios.post('/me').then((response) => {
-            if (!store?.state?.user?.id) {
-                const response = store.login()
-                console.log("Current User", response)
-            };
+            store.storeUser(response.data)
         }).catch(() => {
             Cookie.deleteToken();
             n = {name: 'login'};
