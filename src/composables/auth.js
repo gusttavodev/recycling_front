@@ -25,8 +25,8 @@ export default function useAuth() {
             router.push({name: 'index'})
 
         } catch (e) {
-            console.log("Error => ", e)
             if (e.response.status === 422) {  
+                toaster.warning("Verifique os campos")
                 errors.value = dataFormat.formatErrors(e.response.data.errors)
             }else if(e.response.status === 401){
                 toaster.warning(e.response.data.message)
@@ -43,6 +43,7 @@ export default function useAuth() {
             router.push({name: 'index'})
         } catch (e) {
             if (e.response.status === 422) {  
+                toaster.warning("Verifique os campos")
                 errors.value = dataFormat.formatErrors(e.response.data.errors)
             }else if(e.response.status === 401){
                 toaster.warning(e.response.data.message)

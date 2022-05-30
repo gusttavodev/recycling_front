@@ -14,11 +14,13 @@ import Product from '../views/Admin/Product/Index.vue';
 
 import IndexCategory from '../views/Admin/Category/Index.vue';
 import CreateCategory from '../views/Admin/Category/Create.vue';
+import EditCategory from '../views/Admin/Category/Edit.vue';
 
 
 const category = [
     { path: 'category', name: 'category.index', component: IndexCategory },
-    { path: 'category/create', name: 'category.create', component: CreateCategory }
+    { path: 'category/create', name: 'category.create', component: CreateCategory },
+    { path: 'category/:id/edit', name: 'category.edit', component: EditCategory, props: true }
 ]
 
 const routes = [

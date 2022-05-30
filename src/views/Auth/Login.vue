@@ -9,8 +9,7 @@
             :error="errors?.email"
             class="mt-10"
             label="Email"
-            type="email"
-            
+            type="email"            
           />
 
           <v-input
@@ -19,8 +18,7 @@
             :error="errors?.password"
             class="mt-10"
             label="Senha"
-            type="password"
-            
+            type="password"            
           />
 
           <div class="flex items-center justify-between">

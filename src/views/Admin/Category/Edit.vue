@@ -6,7 +6,7 @@
       aria-hidden="true" 
     /> 
     </router-link>
-    <h1 class="py-2 text-xl font-semibold text-gray-900">Crie uma categoria para o sistema</h1>      
+    <h1 class="py-2 text-xl font-semibold text-gray-900">Edite uma categoria do sistema</h1>  
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form @submit.prevent="submit">
         <div class="grid grid-cols-9 gap-6">
@@ -16,8 +16,8 @@
               class="mt-10"
               label="Nome"
               type="text"
-              v-model="form.name"   
-              :value="form.name" 
+              v-model="category.name"   
+              :value="category?.name" 
               :error="errors?.name"
             />
           </div>
@@ -26,8 +26,8 @@
               class="mt-10"
               label="Cor"
               type="text"  
-              v-model="form.color"   
-              :value="form.color"  
+              v-model="category.color"   
+              :value="category.color"  
               :error="errors?.color"     
             />
           </div>
@@ -35,7 +35,7 @@
             <v-toggle
               class="mt-10"
               label="Habilitada"   
-              v-model="form.enable"  
+              v-model="category.enable"  
             />
           </div>
 
@@ -51,7 +51,7 @@
               focus:outline-none focus:ring-2 focus:ring-indigo-500 
               focus:ring-offset-2 sm:w-auto"
           >
-          Criar
+          Atualizar
           </button>
         </div>
       </form>
@@ -61,22 +61,27 @@
 
 
 <script setup>
-import {reactive} from 'vue'
+
+import {defineProps, onMounted} from 'vue'
 import {
   ArrowSmLeftIcon
 } from '@heroicons/vue/outline'
 import useCategories from '../../../composables/categories'
 
-const form = reactive({
-    name: '',
-    color: '',
-    enable: true
+const { category, errors, updateCategory, findCategory } = useCategories()
+
+const props = defineProps({
+  id: {
+    type: [String, Number],
+    default: false
+  },
 })
- 
-const { errors, storeCategories } = useCategories()
+
+onMounted(findCategory(props.id))
 
 const submit = async () => {
-  await storeCategories(form)
+  await updateCategory(category)
 }
+
 
 </script>

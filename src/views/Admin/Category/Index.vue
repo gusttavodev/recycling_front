@@ -40,14 +40,18 @@
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ category.id }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ category.name }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  <div class="w-8 h-8 rounded-lg selected-color" :style="'background-color:'+category.color"></div>
+                  <div class="w-8 h-8 rounded-lg selected-color" :style="`background-color:${category.color}`"></div>
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 flex justify-center">
                   <CheckCircleIcon v-if="category.enable" class="h-6 w-6 text-green-500"  />
                   <XCircleIcon v-else class="text-red-500 h-6 w-6"  />                    
                 </td>
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">                 
+                  <router-link 
+                    :to="{ name: 'category.edit', params: { id: category.id } }"
+                  >
                   <PencilIcon class="h-6 w-6 text-indigo-500"/>
+                  </router-link>
                 </td>
               </tr>
             </tbody>
