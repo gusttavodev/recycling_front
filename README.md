@@ -13,6 +13,7 @@ https://vuex.vuejs.org/guide/composition-api.html#accessing-mutations-and-action
 https://www.thisdot.co/blog/vue-3-2-using-composition-api-with-script-setup
 
 
+
 # To use SSH set remote origin with SSH 
 ```
  ssh-add ~/.ssh/id_rsa_github
@@ -21,3 +22,11 @@ https://www.thisdot.co/blog/vue-3-2-using-composition-api-with-script-setup
 # TODO
 
 Meu componente de input precisa de um :value com o v-model se não fica bugado
+
+
+git remote set-url origin git@:github.com-gusttavodev/recycling_front.git
+ssh-add ~/.ssh/personal-git
+
+personal-git
+github.com-gusttavodev
+github.com-gustav-devsquad

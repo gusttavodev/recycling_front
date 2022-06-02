@@ -61,6 +61,18 @@ export default function useCategories() {
         }
     }
 
+    const deleteCategory = async (id) => {
+        try {
+            await axios.delete(`/category/${id}`)
+            toaster.success("Categoria deletada com sucesso")
+            router.push({name: 'category.index'})
+        } catch (e) {
+            if(e.response.status === 401){
+                toaster.warning(e.response.data.message)
+            }
+        }
+    }
+
     return {
         errors,
         category,
@@ -68,6 +80,7 @@ export default function useCategories() {
         getCategories,
         storeCategories,
         findCategory,
-        updateCategory
+        updateCategory,
+        deleteCategory
     }
 }

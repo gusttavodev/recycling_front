@@ -59,7 +59,6 @@
   </div>
 </template>
 
-
 <script setup>
 
 import {defineProps, onMounted} from 'vue'

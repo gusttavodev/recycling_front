@@ -46,12 +46,18 @@
                   <CheckCircleIcon v-if="category.enable" class="h-6 w-6 text-green-500"  />
                   <XCircleIcon v-else class="text-red-500 h-6 w-6"  />                    
                 </td>
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">                 
-                  <router-link 
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">   
+                  <div class="flex">
+                    <router-link 
                     :to="{ name: 'category.edit', params: { id: category.id } }"
-                  >
-                  <PencilIcon class="h-6 w-6 text-indigo-500"/>
-                  </router-link>
+                    >
+                    <PencilIcon class="h-6 w-6 text-indigo-500"/>
+                    </router-link>
+                    <TrashIcon 
+                      class="h-6 w-6 text-red-500 cursor-pointer" 
+                      @click="openModal(category.id)"
+                    />
+                  </div>                       
                 </td>
               </tr>
             </tbody>
@@ -60,32 +66,45 @@
       </div>
     </div>
   </div>   
+  <v-modal
+    :open="deleteModal"
+    @onClose="closeModal"
+    @onSubmit="submitModal"
+    title="Deseja realmente deletar essa categoria ?"
+    modalType="warning"
+  />
 </template>
 
-<script>
+<script setup>
 import useCategories from '../../../composables/categories'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import {
   CheckCircleIcon,
   XCircleIcon,
-  PencilIcon
+  PencilIcon,
+  TrashIcon
 } from '@heroicons/vue/outline'
 
-export default {
-    components: {
-      CheckCircleIcon,
-      XCircleIcon,
-      PencilIcon
-    },
-    setup() {
-        const { categories, getCategories } = useCategories()
-        
-        onMounted(getCategories)
+let deleteModal = ref(false)
+let selectedItem = ref(null)
 
-        return {
-          CheckCircleIcon,
-            categories
-        }
-    }
+const { categories, getCategories, deleteCategory } = useCategories()
+
+onMounted(getCategories)
+
+const closeModal = () => {
+  deleteModal.value = false
+  selectedItem.value = null
 }
+const openModal = (id) => {
+  deleteModal.value = true
+  selectedItem.value = id
+}
+const submitModal = async () => {
+  await deleteCategory(selectedItem.value)
+  closeModal()
+  await getCategories()
+}
+
+
 </script>
