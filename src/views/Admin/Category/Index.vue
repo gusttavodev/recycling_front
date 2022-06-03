@@ -55,7 +55,7 @@
                     </router-link>
                     <TrashIcon 
                       class="h-6 w-6 text-red-500 cursor-pointer" 
-                      @click="openModal(category.id)"
+                      @click="openDeleteModal(category.id)"
                     />
                   </div>                       
                 </td>
@@ -66,12 +66,9 @@
       </div>
     </div>
   </div>   
-  <v-modal
-    :open="deleteModal"
-    @onClose="closeModal"
-    @onSubmit="submitModal"
-    title="Deseja realmente deletar essa categoria ?"
-    modalType="warning"
+  <Delete
+    ref="deleteModal"
+    @onDelete="getCategories"
   />
 </template>
 
@@ -84,27 +81,17 @@ import {
   PencilIcon,
   TrashIcon
 } from '@heroicons/vue/outline'
+import Delete from './Delete.vue'
 
-let deleteModal = ref(false)
-let selectedItem = ref(null)
+const deleteModal = ref(null)
 
 const { categories, getCategories, deleteCategory } = useCategories()
 
 onMounted(getCategories)
 
-const closeModal = () => {
-  deleteModal.value = false
-  selectedItem.value = null
+// Precisa ser chamado em uma função se não vem como null
+const openDeleteModal = (id) => {
+  deleteModal.value.openModal(id)
 }
-const openModal = (id) => {
-  deleteModal.value = true
-  selectedItem.value = id
-}
-const submitModal = async () => {
-  await deleteCategory(selectedItem.value)
-  closeModal()
-  await getCategories()
-}
-
 
 </script>
