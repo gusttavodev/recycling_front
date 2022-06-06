@@ -124,7 +124,7 @@ const userStore = useUserStore()
 
 const navigation = [
   { name: 'Dashboard', href: {name: 'index'}, icon: ChartPieIcon, current: true },
-  { name: 'Produtos', href: {name: 'product'}, icon: CubeIcon, current: false },
+  { name: 'Produtos', href: {name: 'product.index'}, icon: CubeIcon, current: false },
   { name: 'Categorias', href: {name: 'category.index'}, icon: BookmarkIcon, current: false }
 ]
 const sidebarOpen = ref(false)

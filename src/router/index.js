@@ -16,11 +16,19 @@ import IndexCategory from '../views/Admin/Category/Index.vue';
 import CreateCategory from '../views/Admin/Category/Create.vue';
 import EditCategory from '../views/Admin/Category/Edit.vue';
 
+import IndexProduct from '../views/Admin/Product/Index.vue';
+import CreateProduct from '../views/Admin/Product/Create.vue';
+
 
 const category = [
     { path: 'category', name: 'category.index', component: IndexCategory },
     { path: 'category/create', name: 'category.create', component: CreateCategory },
     { path: 'category/:id/edit', name: 'category.edit', component: EditCategory, props: true }
+]
+
+const product = [
+    { path: 'product', name: 'product.index', component: IndexProduct },
+    { path: 'product/create', name: 'product.create', component: CreateProduct }
 ]
 
 const routes = [
@@ -29,7 +37,7 @@ const routes = [
         beforeEnter: Guard.redirectIfNotAuthenticated,
         children: [
             { path: '', name: 'index', component: Home },
-            { path: 'product', name: 'product', component: Product },
+            ...product,
             ...category
         ],
     },
