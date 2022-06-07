@@ -16,26 +16,26 @@
               class="mt-10"
               label="Nome"
               type="text"
-              v-model="product.name"   
-              :value="product.name" 
+              v-model="form.name"   
+              :value="form.name" 
               :error="errors?.name"
             />
           </div>
           <div class="col-span-3 sm:col-span-3">
-            <v-textarea
+            <v-input
               class="mt-10"
-              label="Descrição"
+              label="Cor"
               type="text"  
-              v-model="product.description"   
-              :value="product.description"  
-              :error="errors?.description"     
+              v-model="form.color"   
+              :value="form.color"  
+              :error="errors?.color"     
             />
           </div>
           <div class="col-span-3 sm:col-span-3">
             <v-toggle
               class="mt-10"
               label="Habilitada"   
-              v-model="product.enable"  
+              v-model="form.enable"  
             />
           </div>
 
@@ -65,12 +65,18 @@ import {reactive} from 'vue'
 import {
   ArrowSmLeftIcon
 } from '@heroicons/vue/outline'
-import useProducts from '../../../composables/product'
+import useCategories from '../../../composables/categories'
 
-const { product, errors, storeProduct } = useProducts()
+const form = reactive({
+    name: '',
+    color: '',
+    enable: true
+})
+ 
+const { errors, storeCategories } = useCategories()
 
 const submit = async () => {
-  await storeProduct(product)
+  await storeCategories(form)
 }
 
 </script>

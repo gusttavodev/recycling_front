@@ -10,6 +10,7 @@ import './index.css'
 import Input from './components/Shared/input.vue'
 import Toggle from './components/Shared/toggle.vue'
 import Modal from './components/Shared/modal.vue'
+import TextArea from './components/Shared/textarea.vue'
 
 const app = createApp(App)
 
@@ -20,6 +21,7 @@ app.use(Toaster)
 app.component('v-input', Input)
 app.component('v-toggle', Toggle)
 app.component('v-modal', Modal)
+app.component('v-textarea', TextArea)
 
 app.config.globalProperties.$axios = axios;
 
