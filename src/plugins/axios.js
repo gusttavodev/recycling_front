@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Cookie from '../service/cookie';
 
-// axios.defaults.baseURL = "https://recycling-api-una.herokuapp.com/api";
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = "https://recycling-api-una.herokuapp.com/api";
+// axios.defaults.baseURL = "http://localhost:8000/api";
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
