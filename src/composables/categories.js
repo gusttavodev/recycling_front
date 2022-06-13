@@ -20,6 +20,7 @@ export default function useCategories() {
 
     const getCategories = async () => {
         let response = await axios.get('/category')
+        console.log("Get categories", response.data)
         categories.value = response.data
     }
 

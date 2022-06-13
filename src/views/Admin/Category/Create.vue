@@ -22,7 +22,15 @@
             />
           </div>
           <div class="col-span-3 sm:col-span-3">
-            <v-input
+            <!-- <v-input
+              class="mt-10"
+              label="Cor"
+              type="text"  
+              v-model="form.color"   
+              :value="form.color"  
+              :error="errors?.color"     
+            /> -->
+            <v-input-color
               class="mt-10"
               label="Cor"
               type="text"  

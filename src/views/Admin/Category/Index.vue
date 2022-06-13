@@ -47,7 +47,7 @@
                   <XCircleIcon v-else class="text-red-500 h-6 w-6"  />                    
                 </td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">   
-                  <div class="flex">
+                  <div class="flex items-center justify-center gap-5">
                     <router-link 
                     :to="{ name: 'category.edit', params: { id: category.id } }"
                     >

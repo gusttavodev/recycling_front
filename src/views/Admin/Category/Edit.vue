@@ -22,7 +22,7 @@
             />
           </div>
           <div class="col-span-3 sm:col-span-3">
-            <v-input
+            <v-input-color
               class="mt-10"
               label="Cor"
               type="text"  

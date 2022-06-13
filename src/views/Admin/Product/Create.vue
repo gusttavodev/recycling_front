@@ -31,6 +31,19 @@
               :error="errors?.description"     
             />
           </div>
+
+          <div class="col-span-3 sm:col-span-3">
+            <v-select
+              class="mt-10"
+              label="Descrição"
+              type="text"  
+              v-model="product.categories"   
+              :value="product.categories"  
+              :error="errors?.categories" 
+              :options="categories"    
+            />
+          </div>
+
           <div class="col-span-3 sm:col-span-3">
             <v-toggle
               class="mt-10"
@@ -61,13 +74,17 @@
 
 
 <script setup>
-import {reactive} from 'vue'
+import {reactive, onMounted} from 'vue'
 import {
   ArrowSmLeftIcon
 } from '@heroicons/vue/outline'
 import useProducts from '../../../composables/product'
+import useCategories from '../../../composables/categories'
 
 const { product, errors, storeProduct } = useProducts()
+const { categories, getCategories } = useCategories()
+
+onMounted(getCategories)
 
 const submit = async () => {
   await storeProduct(product)

@@ -9,7 +9,8 @@ export default function useProducts() {
         id: '',
         name: '',
         description: '',
-        enable: true
+        enable: true,
+        categories: []
     })
     const products = ref([])
     const errors = ref({})
