@@ -4,12 +4,16 @@
         {{ label }}
     </label>
     <div class="mt-1 relative rounded-md shadow-sm">
+     
         <Multiselect
           v-model="selectedValue"
           :options="options"
           mode="tags"
+
           track-by="id"
           label="name"
+          valueProp="id"
+
           :classes="selectClass"
           :required="required"          
           :close-on-select="false"

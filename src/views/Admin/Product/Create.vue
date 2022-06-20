@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white shadow px-4 py-3 sm:rounded-lg sm:p-6">   
-    <router-link :to="{name: 'category.index'}">
+    <router-link :to="{name: 'product.index'}">
     <ArrowSmLeftIcon 
       class="h-10 w-10 text-indigo-600 mb-3 cursor-pointer" 
       aria-hidden="true" 
@@ -9,9 +9,9 @@
     <h1 class="py-2 text-xl font-semibold text-gray-900">Crie um produto para o sistema</h1>      
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form @submit.prevent="submit">
-        <div class="grid grid-cols-9 gap-6">
+        <div class="grid grid-cols-8 gap-6">
 
-          <div class="col-span-3 sm:col-span-3">
+          <div class="col-span-4 sm:col-span-4">
             <v-input
               class="mt-10"
               label="Nome"
@@ -21,7 +21,7 @@
               :error="errors?.name"
             />
           </div>
-          <div class="col-span-3 sm:col-span-3">
+          <div class="col-span-4 sm:col-span-4">
             <v-textarea
               class="mt-10"
               label="Descrição"
@@ -32,10 +32,12 @@
             />
           </div>
 
-          <div class="col-span-3 sm:col-span-3">
+        </div>
+        <div class="grid grid-cols-8 gap-6">
+          <div class="col-span-4 sm:col-span-4">
             <v-select
               class="mt-10"
-              label="Descrição"
+              label="Categorias"
               type="text"  
               v-model="product.categories"   
               :value="product.categories"  
@@ -43,15 +45,12 @@
               :options="categories"    
             />
           </div>
-
-          <div class="col-span-3 sm:col-span-3">
+          <div class="col-span-4 sm:col-span-4 pt-14">
             <v-toggle
-              class="mt-10"
               label="Habilitada"   
               v-model="product.enable"  
             />
           </div>
-
         </div>
         <div class="flex justify-end">
           <button 
