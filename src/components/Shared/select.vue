@@ -4,7 +4,6 @@
         {{ label }}
     </label>
     <div class="mt-1 relative rounded-md shadow-sm">
-     
         <Multiselect
           v-model="selectedValue"
           :options="options"
@@ -46,7 +45,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed, ref } from 'vue'
+import { defineProps, computed } from 'vue'
 import Multiselect from '@vueform/multiselect'
 
 const props = defineProps({
@@ -86,8 +85,7 @@ const props = defineProps({
         return []
       },
     },
-
-    value: Array,
+    selectedValue: Array,
     label: String,
     error: String,
 
@@ -98,7 +96,6 @@ const props = defineProps({
       }
     },
 })
-let selectedValue = ref()
 const selectClass = computed(() => {
   switch (null) {
     default:
@@ -114,7 +111,7 @@ const selectClass = computed(() => {
       }
   }
 })
-
+let selectedValue = computed(() => (props.selectedValue))
 </script>
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>

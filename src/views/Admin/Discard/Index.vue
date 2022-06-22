@@ -1,8 +1,8 @@
 <template>
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-xl font-semibold text-gray-900">Produtos</h1>
-      <p class="mt-2 text-sm text-gray-700">Listagem de todas as produtos do seu sistema.</p>
+      <h1 class="text-xl font-semibold text-gray-900">Descartes</h1>
+      <p class="mt-2 text-sm text-gray-700">Listagem de todos descartes registrados no sistema.</p>
     </div>    
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">     
       <router-link 
@@ -27,35 +27,33 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">ID</th>
-                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nome</th>
-                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Descrição</th>
-                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 flex justify-center">Habilitada</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Data</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Quantidade</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 flex justify-center">Produto</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                   <span class="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <tr v-for="product in products" :key="product.id">
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ product.id }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ product.name }}</td>
-               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ `${product.description.slice(0, 10)}...` }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 flex justify-center">
-                  <CheckCircleIcon v-if="product.enable" class="h-6 w-6 text-green-500"  />
-                  <XCircleIcon v-else class="text-red-500 h-6 w-6"  />                    
-                </td>
+              <tr v-for="discard in discards" :key="discard.id">
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ discard.id }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ discard.quantity }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ discard.date }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ discard?.product?.name }}</td>
+            
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">   
-                  <div class="flex">
+                  <!-- <div class="flex">
                     <router-link 
-                    :to="{ name: 'product.edit', params: { id: product.id } }"
+                    :to="{ name: 'discard.edit', params: { id: discard.id } }"
                     >
                     <PencilIcon class="h-6 w-6 text-indigo-500"/>
                     </router-link>
                     <TrashIcon 
                       class="h-6 w-6 text-red-500 cursor-pointer" 
-                      @click="openDeleteModal(product.id)"
+                      @click="openDeleteModal(discard.id)"
                     />
-                  </div>                       
+                  </div>                        -->
                 </td>
               </tr>
             </tbody>
@@ -66,12 +64,12 @@
   </div>   
   <Delete
     ref="deleteModal"
-    @onDelete="getProducts"
+    @onDelete="getDiscards"
   />
 </template>
 
 <script setup>
-import useProducts from '../../../composables/product'
+import useDiscard from '../../../composables/discard'
 import { onMounted, ref } from 'vue'
 import {
   CheckCircleIcon,
@@ -83,9 +81,9 @@ import Delete from './Delete.vue'
 
 const deleteModal = ref(null)
 
-const { products, getProducts } = useProducts()
+const { discards, getDiscards } = useDiscard()
 
-onMounted(getProducts)
+onMounted(getDiscards)
 
 // Precisa ser chamado em uma função se não vem como null
 const openDeleteModal = (id) => {

@@ -18,6 +18,10 @@ import EditCategory from '../views/Admin/Category/Edit.vue';
 
 import IndexProduct from '../views/Admin/Product/Index.vue';
 import CreateProduct from '../views/Admin/Product/Create.vue';
+import EditProduct from '../views/Admin/Product/Edit.vue';
+
+import IndexDiscard from '../views/Admin/Discard/Index.vue';
+import CreateDiscard from '../views/Admin/Discard/Create.vue';
 
 
 const category = [
@@ -28,7 +32,13 @@ const category = [
 
 const product = [
     { path: 'product', name: 'product.index', component: IndexProduct },
-    { path: 'product/create', name: 'product.create', component: CreateProduct }
+    { path: 'product/create', name: 'product.create', component: CreateProduct },
+    { path: 'product/:id/edit', name: 'product.edit', component: EditProduct, props: true }
+]
+
+const discard = [
+    { path: 'discard', name: 'discard.index', component: IndexDiscard },
+    { path: 'discard/create', name: 'discard.create', component: CreateDiscard }
 ]
 
 const routes = [
@@ -38,7 +48,8 @@ const routes = [
         children: [
             { path: '', name: 'index', component: Home },
             ...product,
-            ...category
+            ...category,
+            ...discard
         ],
     },
     {

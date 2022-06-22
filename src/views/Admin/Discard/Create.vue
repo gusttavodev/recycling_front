@@ -6,7 +6,7 @@
       aria-hidden="true" 
     /> 
     </router-link>
-    <h1 class="py-2 text-xl font-semibold text-gray-900">Edite um produto do sistema</h1>      
+    <h1 class="py-2 text-xl font-semibold text-gray-900">Crie um produto para o sistema</h1>      
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form @submit.prevent="submit">
         <div class="grid grid-cols-8 gap-6">
@@ -34,18 +34,17 @@
 
         </div>
         <div class="grid grid-cols-8 gap-6">
-          <div class="col-span-4 sm:col-span-4">            
-              <v-select
-                class="mt-10"
-                label="Categorias"
-                type="text"  
-                v-model="product.categories"   
-                :selectedValue="product.categories"  
-                :error="errors?.categories" 
-                :options="categories"    
-              />
+          <div class="col-span-4 sm:col-span-4">
+            <v-select
+              class="mt-10"
+              label="Categorias"
+              type="text"  
+              v-model="product.categories"   
+              :value="product.categories"  
+              :error="errors?.categories" 
+              :options="categories"    
+            />
           </div>
-          
           <div class="col-span-4 sm:col-span-4 pt-14">
             <v-toggle
               label="Habilitada"   
@@ -74,30 +73,20 @@
 
 
 <script setup>
-import {reactive, onBeforeMount} from 'vue'
+import {reactive, onMounted} from 'vue'
 import {
   ArrowSmLeftIcon
 } from '@heroicons/vue/outline'
 import useProducts from '../../../composables/product'
 import useCategories from '../../../composables/categories'
 
-const props = defineProps({
-  id: {
-    type: [String, Number],
-    default: false
-  },
-})
-
-const { product, errors, findProduct, updateProduct } = useProducts()
+const { product, errors, storeProduct } = useProducts()
 const { categories, getCategories } = useCategories()
 
-onBeforeMount(async () => {
-  await findProduct(props.id)
-  await getCategories()
-})
+onMounted(getCategories)
 
 const submit = async () => {
-  await updateProduct(product)
+  await storeProduct(product)
 }
 
 </script>

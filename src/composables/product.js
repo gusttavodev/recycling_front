@@ -24,6 +24,15 @@ export default function useProducts() {
         products.value = response.data
     }
 
+    const findProduct = async (id) => {
+        let response = await axios.get(`/product/${id}`)
+        product.id = response.data.id
+        product.name = response.data.name
+        product.description = response.data.description
+        product.enable = response.data.enable
+        product.categories = response.data.categories.map(item => item.id)
+    }
+
     const storeProduct = async (data) => {
         try {
             await axios.post('/product', data)
@@ -39,11 +48,41 @@ export default function useProducts() {
         }
     }
 
+    const updateProduct = async (data) => {
+        try {
+            await axios.put(`/product/${data.id}`, data)
+            toaster.success("Produto atualizada com sucesso")
+            router.push({name: 'product.index'})
+        } catch (e) {
+            if (e.response.status === 422) {  
+                toaster.warning("Verifique os campos")
+                errors.value = dataFormat.formatErrors(e.response.data.errors)
+            }else if(e.response.status === 401){
+                toaster.warning(e.response.data.message)
+            }
+        }
+    }
+
+    const deleteProduct = async (id) => {
+        try {
+            await axios.delete(`/product/${id}`)
+            toaster.success("Produto deletada com sucesso")
+            router.push({name: 'product.index'})
+        } catch (e) {
+            if(e.response.status === 401){
+                toaster.warning(e.response.data.message)
+            }
+        }
+    }
+
     return {
         errors,
         product,
         products,
         getProducts,
-        storeProduct
+        findProduct,
+        storeProduct,
+        updateProduct,
+        deleteProduct
     }
 }
