@@ -4,7 +4,7 @@ import { createToaster } from "@meforma/vue-toaster";
 import { useRouter } from 'vue-router'
 import dataFormat from "../service/dataFormat";
 
-export default function useDiscard() {
+export default function useInformations() {
     let discard = reactive({
         id: '',
         quantity: '',

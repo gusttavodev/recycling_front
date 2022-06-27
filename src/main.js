@@ -13,6 +13,7 @@ import Modal from './components/Shared/modal.vue'
 import TextArea from './components/Shared/textarea.vue'
 import select from './components/Shared/select.vue'
 import inputColor from './components/Shared/input-color.vue'
+import BarChart from './components/Shared/bar-chart.vue'
 
 import Vue3ColorPicker from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
@@ -30,6 +31,7 @@ app.component('v-modal', Modal)
 app.component('v-textarea', TextArea)
 app.component('v-select', select)
 app.component('v-input-color', inputColor)
+app.component('v-bar-chart', BarChart)
 
 app.config.globalProperties.$axios = axios;
 
